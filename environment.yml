@@ -1,0 +1,10 @@
+name: ph306
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.14
+  - astropy
+  - numpy
+  - numpydoc
+  - pytest
+  - mypy
