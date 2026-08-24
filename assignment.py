@@ -16,7 +16,7 @@ EARTH_GRAVITY = u.Quantity(9.81, u.m / u.s**2)  # Earth's gravitational accelera
 
 
 # --- Functions to Implement --- #
-@u.quantity_input(v0="speed", a="acceleration", t="time")
+@u.quantity_input(v0="speed", a="acceleration", t="time") # type: ignore[untyped-decorator]
 def distance_traveled(v0: Q[u.m/u.s], a: Q[u.m/u.s**2], t: Q[u.s]) -> Q[u.m]:
     """Return the displacement for constant acceleration.
 
@@ -86,7 +86,11 @@ def free_fall_height(
 
 
 
-def projectile_range(v0, th0, g = EARTH_GRAVITY):
+def projectile_range(
+        v0 : Q[u.m/u.s], 
+        th0 : Q[u.deg], 
+        g : Q[u.m/u.s**2] = EARTH_GRAVITY
+        ) -> Q[u.m]:
     """Return the ideal range of a projectile launched and landing at the same height.
     
     Parameters
@@ -95,20 +99,38 @@ def projectile_range(v0, th0, g = EARTH_GRAVITY):
         Intial velocity of the object.
     th0 : Quantity
         The angle the object was launched in degrees.
-    g : Quantity
-       Acceleration of the object due to gravity. 
+    g : Quantity, optional
+        Acceleration of the object due to gravity.
 
     Returns
     -------
-    Quantity['length']
+    Quantity
         The horizontal distance traveled.
     """
     return (v0**2*np.sin(2*th0))/g
     
 
 
-def quadratic_solver(a: float, b, c) -> tuple[float, float]:
+def quadratic_solver(
+        a : float, 
+        b : float, 
+        c : float
+        ) -> tuple[float, float]:
     """Return the two roots of a quadratic equation.
+
+    Parameters
+    ----------
+    a : Quantity
+        Constant related to the second degree term in a second degree polynomial.
+    b : Quantity
+        Constant related to the first degree term.
+    c : Quantity
+        Constant related to the zeroth degree term.
+    
+    Returns
+    -------
+    Quantity
+        The value(s) where a parabola intersect the x-axis.
     """
     return (-b+np.sqrt(b**2-4*a*c))/2*a, (-b-np.sqrt(b**2-4*a*c))/2*a
     
