@@ -16,7 +16,7 @@ EARTH_GRAVITY = u.Quantity(9.81, u.m / u.s**2)  # Earth's gravitational accelera
 
 
 # --- Functions to Implement --- #
-@u.quantity_input(v0="speed", a="acceleration", t="time") # type: ignore[untyped-decorator]
+@u.quantity_input(v0="speed", a="acceleration", t="time") type: ignore[untyped-decorator]
 def distance_traveled(v0: Q[u.m/u.s], a: Q[u.m/u.s**2], t: Q[u.s]) -> Q[u.m]:
     """Return the displacement for constant acceleration.
 
@@ -35,10 +35,10 @@ def distance_traveled(v0: Q[u.m/u.s], a: Q[u.m/u.s**2], t: Q[u.s]) -> Q[u.m]:
         Displacement computed from $v_0 t + \frac{1}{2} a t^2$.
     """
     return v0*t + 0.5*a*t**2
-    
+ 
 
 
-def kinetic_energy(m: Q[u.kg], v: Q[u.m/u.s]) -> Q[u.J]:
+def kinetic_energy(m:Q[u.kg], v:Q[u.m/u.s])-> Q[u.J]:
     """Return the kinetic energy of an object.
 
     Parameters
@@ -54,7 +54,7 @@ def kinetic_energy(m: Q[u.kg], v: Q[u.m/u.s]) -> Q[u.J]:
         Kinetic energy of the object.
     """
     return 0.5*m*v**2
-   
+
 
 
 def free_fall_height(
@@ -82,17 +82,15 @@ def free_fall_height(
         Height of the object as a function of time.
     """
     return y0+v0*t-0.5*g*t**2
-    
-
 
 
 def projectile_range(
-        v0 : Q[u.m/u.s], 
-        th0 : Q[u.deg], 
-        g : Q[u.m/u.s**2] = EARTH_GRAVITY
+        v0: Q[u.m/u.s], 
+        th0: Q[u.deg], 
+        g: Q[u.m/u.s**2] = EARTH_GRAVITY
         ) -> Q[u.m]:
     """Return the ideal range of a projectile launched and landing at the same height.
-    
+
     Parameters
     ----------
     v0 : Quantity
@@ -108,14 +106,13 @@ def projectile_range(
         The horizontal distance traveled.
     """
     return (v0**2*np.sin(2*th0))/g
-    
+
 
 
 def quadratic_solver(
-        a : float, 
-        b : float, 
-        c : float
-        ) -> tuple[float, float]:
+        a: float, 
+        b: float, 
+        c: float) -> tuple[float, float]:
     """Return the two roots of a quadratic equation.
 
     Parameters
@@ -126,11 +123,10 @@ def quadratic_solver(
         Constant related to the first degree term.
     c : Quantity
         Constant related to the zeroth degree term.
-    
+
     Returns
     -------
     Quantity
         The value(s) where a parabola intersect the x-axis.
     """
     return (-b+np.sqrt(b**2-4*a*c))/2*a, (-b-np.sqrt(b**2-4*a*c))/2*a
-    
