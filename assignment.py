@@ -103,6 +103,9 @@ def projectile_range(
     Quantity
         The horizontal distance traveled.
     """
+
+    if np.any(g <= 0 * u.m/u.s**2):
+        raise ValueError("g must be positive.")
     return (v0**2*np.sin(2*th0))/g
 
 
@@ -126,4 +129,4 @@ def quadratic_solver(
     Quantity
         The value(s) where a parabola intersect the x-axis.
     """
-    return (-b+np.sqrt(b**2-4*a*c))/2*a, (-b-np.sqrt(b**2-4*a*c))/2*a
+    return (-b+np.sqrt(b**2-4*a*c))/(2*a), (-b-np.sqrt(b**2-4*a*c))/(2*a)
