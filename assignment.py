@@ -16,7 +16,7 @@ EARTH_GRAVITY = u.Quantity(9.81, u.m / u.s**2)  # Earth's gravitational accelera
 
 
 # --- Functions to Implement --- #
-@u.quantity_input(v0="speed", a="acceleration", t="time") #type: ignore[untyped-decorator]
+@u.quantity_input(v0="speed", a="acceleration", t="time") # type: ignore[untyped-decorator]
 def distance_traveled(v0: Q[u.m/u.s], a: Q[u.m/u.s**2], t: Q[u.s]) -> Q[u.m]:
     """Return the displacement for constant acceleration.
 
@@ -35,10 +35,9 @@ def distance_traveled(v0: Q[u.m/u.s], a: Q[u.m/u.s**2], t: Q[u.s]) -> Q[u.m]:
         Displacement computed from $v_0 t + \frac{1}{2} a t^2$.
     """
     return v0*t + 0.5*a*t**2
- 
 
 
-def kinetic_energy(m:Q[u.kg], v:Q[u.m/u.s])-> Q[u.J]:
+def kinetic_energy(m: Q[u.kg], v: Q[u.m/u.s]) -> Q[u.J]:
     """Return the kinetic energy of an object.
 
     Parameters
@@ -54,7 +53,6 @@ def kinetic_energy(m:Q[u.kg], v:Q[u.m/u.s])-> Q[u.J]:
         Kinetic energy of the object.
     """
     return 0.5*m*v**2
-
 
 
 def free_fall_height(
@@ -85,8 +83,8 @@ def free_fall_height(
 
 
 def projectile_range(
-        v0: Q[u.m/u.s], 
-        th0: Q[u.deg], 
+        v0: Q[u.m/u.s],
+        th0: Q[u.deg],
         g: Q[u.m/u.s**2] = EARTH_GRAVITY
         ) -> Q[u.m]:
     """Return the ideal range of a projectile launched and landing at the same height.
@@ -108,10 +106,9 @@ def projectile_range(
     return (v0**2*np.sin(2*th0))/g
 
 
-
 def quadratic_solver(
-        a: float, 
-        b: float, 
+        a: float,
+        b: float,
         c: float) -> tuple[float, float]:
     """Return the two roots of a quadratic equation.
 
