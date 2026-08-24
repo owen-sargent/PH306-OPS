@@ -16,7 +16,7 @@ EARTH_GRAVITY = u.Quantity(9.81, u.m / u.s**2)  # Earth's gravitational accelera
 
 
 # --- Functions to Implement --- #
-@u.quantity_input(v0="speed", a="acceleration", t="time") type: ignore[untyped-decorator]
+@u.quantity_input(v0="speed", a="acceleration", t="time") #type: ignore[untyped-decorator]
 def distance_traveled(v0: Q[u.m/u.s], a: Q[u.m/u.s**2], t: Q[u.s]) -> Q[u.m]:
     """Return the displacement for constant acceleration.
 
