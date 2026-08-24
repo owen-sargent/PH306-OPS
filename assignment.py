@@ -22,25 +22,39 @@ def distance_traveled(v0: Q[u.m/u.s], a: Q[u.m/u.s**2], t: Q[u.s]) -> Q[u.m]:
 
     Parameters
     ----------
-    v0 : Quantity['speed']
-        Initial velocity of the object.
-    a : Quantity['acceleration']
-        Constant acceleration of the object.
-    t : Quantity['time']
-        Elapsed time over which the object moves.
+    v0 : Quantity
+        Initial velocity of the object (speed).
+    a : Quantity
+        Constant acceleration of the object (acceleration).
+    t : Quantity
+        Elapsed time over which the object moves (time).
 
     Returns
     -------
     Quantity['length']
         Displacement computed from $v_0 t + \frac{1}{2} a t^2$.
     """
-    raise NotImplementedError("Implement distance_traveled")
+    return v0*t + 0.5*a*t**2
+    
 
 
 def kinetic_energy(m: Q[u.kg], v: Q[u.m/u.s]) -> Q[u.J]:
     """Return the kinetic energy of an object.
+
+    Parameters
+    ----------
+    m : Quantity
+        Mass of the object.
+    v : Quantity
+        Velocity of the object.
+
+    Returns
+    -------
+    Quantity
+        Kinetic energy of the object.
     """
-    raise NotImplementedError("Implement kinetic_energy")
+    return 0.5*m*v**2
+   
 
 
 def free_fall_height(
@@ -50,18 +64,51 @@ def free_fall_height(
     g: Q[u.m/u.s**2] = EARTH_GRAVITY,
 ) -> Q[u.m]:
     """Return the height of an object in vertical motion.
+
+    Parameters
+    ----------
+    y0 : Quantity
+        Intial height of the object.
+    t : Quantity
+        Time of flight for object.
+    v0 : Quantity
+        Intial velocity of the object.
+    g : Quantity
+        Acceleration of the object due to gravity.
+
+    Returns
+    -------
+    Quantity['height']
+        Height of the object as a function of time.
     """
-    raise NotImplementedError("Implement free_fall_height")
+    return y0+v0*t-0.5*g*t**2
+    
 
 
 
 def projectile_range(v0, th0, g = EARTH_GRAVITY):
     """Return the ideal range of a projectile launched and landing at the same height.
+    
+    Parameters
+    ----------
+    v0 : Quantity
+        Intial velocity of the object.
+    th0 : Quantity
+        The angle the object was launched in degrees.
+    g : Quantity
+       Acceleration of the object due to gravity. 
+
+    Returns
+    -------
+    Quantity['length']
+        The horizontal distance traveled.
     """
-    raise NotImplementedError("Implement projectile_range")
+    return (v0**2*np.sin(2*th0))/g
+    
 
 
 def quadratic_solver(a: float, b, c) -> tuple[float, float]:
     """Return the two roots of a quadratic equation.
     """
-    raise NotImplementedError("Implement quadratic_solver")
+    return (-b+np.sqrt(b**2-4*a*c))/2*a, (-b-np.sqrt(b**2-4*a*c))/2*a
+    
